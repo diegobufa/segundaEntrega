@@ -189,6 +189,8 @@
 
     }
 
+   
+    
     function peliAgregada(){
         Swal.fire({
             position: 'top-end',
