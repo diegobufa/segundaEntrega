@@ -2,6 +2,7 @@
     const DOMcarrito = document.querySelector('#carrito');
     const DOMtotal = document.querySelector('#total');
     const DOMbotonVaciar = document.querySelector('#boton-vaciar');
+    const DOMbotonComprar = document.querySelector('#boton-comprar')
     const divisa = "$";
 
     const LocalStorage = localStorage;
@@ -98,7 +99,8 @@
     function anyadirProductoAlCarrito(evento){
         
         carrito.push(evento.target.getAttribute('marcador'));
-    
+        
+        peliAgregada();
         renderizarCarrito();
 
         guardarEnLocalStorage();
@@ -145,7 +147,7 @@
     
         const id = evento.target.dataset.item;
         carrito = carrito.filter((carritoId)=>{
-    
+            Quitar();
             return carritoId !== id;
         });
         renderizarCarrito();
@@ -168,13 +170,67 @@
     
     function vaciarCarrito(){
         carrito = [];
-    
+        Vacio();
         renderizarCarrito();
         localStorage.clear() 
 
     }
     
     DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+    DOMbotonComprar.addEventListener ('click', compraRealizada);
+
+    function compraRealizada(){
+        carrito = [];
+        carrito == 0 && Enviado();
+        renderizarCarrito();
+        localStorage.clear();   
+        
+       
+
+    }
+
+    function peliAgregada(){
+        Swal.fire({
+            customClass: {
+                confirmButton: 'swalBtnColor'},
+              title: "Se Agrego con exito al Carrito",
+              icon: 'success'
+        })
+
+    }
+    function Enviado(){
+        Swal.fire({
+          customClass: {
+            confirmButton: 'swalBtnColor'},
+          title: "¡Gracias por tu compra!",
+          icon: 'success'})
+          }
+
+    function Error() {
+            Swal.fire({
+              customClass: {
+                confirmButton: 'swalBtnColor'},
+              title: "¡Completá todos los datos para continuar!",
+              icon: 'error'
+            })
+        }
+        function Quitar() {
+            Swal.fire({
+              customClass: {
+                confirmButton: 'swalBtnColor'},
+              title: "¡La pelicula se retiro del carrito!",
+              icon: 'info'
+            })
+        }
+
+        function Vacio() {
+            Swal.fire({
+              customClass: {
+                confirmButton: 'swalBtnColor'},
+              title: "¡Tu carrito ha sido vaciado con exito!",
+              icon: 'info'
+            })
+        }
     
     cargarenLocalStorage();
     redenderizarProductos ();
