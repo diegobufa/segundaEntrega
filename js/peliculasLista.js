@@ -8,4 +8,4 @@ let peliculasLista =
     {"id": 6, "nombre": "The Batman","genero": "Accion", "duracion": "2hs 36min", "actores": "Robert Pattinson", "actores2": "Zoë Kravitz", "img":["img/batman/The_Batman-449856406-large.jpg"], "precio": 350 },
     {"id": 7, "nombre": "Sonic 2","genero": "Accion Aventura", "duracion": "2hs 6min", "actores": "James Marsden", "actores2": "Jim Carrey", "img":["img/sonic/descarga.jpg"], "precio": 250 },
     {"id": 8, "nombre": "Uncharted","genero": "Accion", "duracion": "1hs 56min", "actores": "Tom Holland", "actores2": "Mark Wahlberg", "img":["img/uncharted/descarga (1).jpg"], "precio": 350 }
-];
+]

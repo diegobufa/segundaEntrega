@@ -5,13 +5,12 @@
     const DOMbotonComprar = document.querySelector('#boton-comprar')
     const divisa = "$";
 
-    const LocalStorage = localStorage;
+    const LocalStorage = localStorage;    
+    let carrito = [];     
     
-    
-    
-    let carrito = [];   
-
-    
+    document.addEventListener("DOMContentLoaded", () => {
+        fetchData();
+    })
 
     function guardarEnLocalStorage() {
         LocalStorage.setItem('carrito', JSON.stringify(carrito));
@@ -23,25 +22,23 @@
         // Los devuelve
         carritoPeliculas = JSON.parse(LocalStorage.getItem('carrito'));}
     }
-
-
-
+const fetchData = async () =>{
+    
     try {
-        fetch(`peliculas.json`)
-        .then(respuesta => {
-            return respuesta.json()
-        })
-        .then(datos => {
-            redenderizarProductos(datos);      
-        }
-        )
+        const res = await fetch('peliculas.json')
+        const data = await res.json()
 
-   } catch(e){
-    console.log(e);
+        redenderizarProductos(data);
+
+   } catch(error){
+    console.log(error);
    }
+}
    
-    function redenderizarProductos(){
-      peliculasLista.forEach((info)=>{
+
+   const redenderizarProductos = data => {
+          console.log(data)
+          data.forEach( info =>{
     
             const miNodo = document.createElement('div');
             miNodo.classList.add('card', 'col-sm-4');
@@ -103,11 +100,9 @@
     function anyadirProductoAlCarrito(evento){
         
         carrito.push(evento.target.getAttribute('marcador'));
-        console.log(carrito)
-        
+        console.log(carrito)        
         peliAgregada();
         renderizarCarrito();
-
         guardarEnLocalStorage();
     }
     
@@ -121,7 +116,7 @@
         carritoSinDuplicados.forEach((item)=>{
     
             const miItem = peliculasLista.filter((itemBaseDAtos)=>{
-    
+
                 return itemBaseDAtos.id === parseInt(item);
             });
             const numeroUnidadesItem = carrito.reduce((total, itemId)=>{
@@ -181,14 +176,20 @@
 
     }
     
-    DOMbotonVaciar.addEventListener('click', vaciarCarrito);
+    DOMbotonVaciar.addEventListener('click', Vacio);
     DOMbotonComprar.addEventListener ('click', compraRealizada);
 
     function compraRealizada(){
-        carrito = [];      
-        Enviado();
-        renderizarCarrito();
-        localStorage.clear();   
+        if(carrito != ''){
+            carrito = [];      
+            Enviado();
+            renderizarCarrito();
+            localStorage.clear();   
+        }else{
+            Error();
+        }
+        
+       
     }   
     
     function peliAgregada(){
@@ -203,40 +204,63 @@
     }
     function Enviado(){
         Swal.fire({
-          customClass: {
-            confirmButton: 'swalBtnColor'},
-          title: "¡Gracias por tu compra!",
-          icon: 'success'})
-          }
+            position: 'top-end',
+            icon: 'success',
+            title: "¡Gracias por tu compra!",
+            showConfirmButton: false,
+            timer: 1500
+          })
+        }
 
     function Error() {
-            Swal.fire({
-              customClass: {
-                confirmButton: 'swalBtnColor'},
-              title: "¡Completá todos los datos para continuar!",
-              icon: 'error'
-            })
+        Swal.fire({
+            position: 'top-end',
+            icon: 'error',
+            title: "¡Completá todos los datos para continuar!",
+            showConfirmButton: false,
+            timer: 1500
+          })
+           
         }
         function Quitar() {
             Swal.fire({
-              customClass: {
-                confirmButton: 'swalBtnColor'},
-              title: "¡La pelicula se retiro del carrito!",
-              icon: 'info'
-            })
+                position: 'top-end',
+                icon: 'info',
+                title: "¡La pelicula se retiro del carrito!",
+                showConfirmButton: false,
+                timer: 1500
+              })
+            
         }
 
         function Vacio() {
-            Swal.fire({
-              customClass: {
-                confirmButton: 'swalBtnColor'},
-              title: "¡Tu carrito ha sido vaciado con exito!",
-              icon: 'info'
-            })
+            if(carrito != ''){
+                 Swal.fire({
+                title: 'Estas seguro de vaciar el carrito?',
+                text: "Si estas seguro presiona borrar de lo contrario puedes cancelar!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Si, Borrar!'
+              }).then((result) => {
+                if (result.isConfirmed) {
+                    vaciarCarrito();
+                  Swal.fire(
+                    'Borrar',
+                    'Tu Carrito se ha vaciado con Exito',
+                    'success'
+                  )
+                }
+              })
+            }else{
+                Error();
+            }
+           
+            
         }
     
-    cargarenLocalStorage();
-    redenderizarProductos();
+    cargarenLocalStorage();    
     renderizarCarrito();
     
  
