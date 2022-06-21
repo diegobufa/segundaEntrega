@@ -7,24 +7,12 @@
 
     const LocalStorage = localStorage;
     
-    let carrito = [];
-
-    let peliculasLista = 
-    [
-        {"id": 1, "nombre": "Maverick","genero": "Accion", "duracion": "2hs 06min", "actores": "Tom Cruise", "actores2": "Jennifer Connelly", "img":["img/maverick/top_gun_maverick-537976462-mmed.jpg"], "precio": 400 },
-        {"id": 2, "nombre": "Doctor Strange en el Multiverso de la Locura","genero": "Accion", "duracion": "2hs 10min", "actores": "Benedict Cumberbatch", "actores2": "Elizabeth Olsen", "img":["img/doctor-strange/Doctor_Strange_en_el_multiverso_de_la_locura-610981386-large.jpg"], "precio": 350},
-        {"id": 3, "nombre": "Todo a la vez en todas partes","genero": "Accion Comedia", "duracion": "2hs 35min", "actores": "Michelle Yeoh", "actores2": "Stephanie Hsu", "img":["img/todo a la vez/2834053.jpg"], "precio": 400 },
-        {"id": 4, "nombre": "Animales Fantasticos: Los secretos de Dumbledore ","genero": "Aventura", "duracion": "2hs 22min", "actores": "Jude Law", "actores2": "Mads Mikkelsen", "img":["img/animales fantasticos/1366_2000 (1).jpeg"], "precio": 350 },
-        {"id": 5, "nombre": "Jurassic World Dominion","genero": "Aventura Accion", "duracion": "2hs 26min", "actores": "Chris Pratt", "actores2": "Bryce Dallas Howard", "img":["img/jurassick world/descarga.jpg"], "precio": 400 },
-        {"id": 6, "nombre": "The Batman","genero": "Accion", "duracion": "2hs 36min", "actores": "Robert Pattinson", "actores2": "Zoë Kravitz", "img":["img/batman/The_Batman-449856406-large.jpg"], "precio": 350 },
-        {"id": 7, "nombre": "Sonic 2","genero": "Accion Aventura", "duracion": "2hs 6min", "actores": "James Marsden", "actores2": "Jim Carrey", "img":["img/sonic/descarga.jpg"], "precio": 250 },
-        {"id": 8, "nombre": "Uncharted","genero": "Accion", "duracion": "1hs 56min", "actores": "Tom Holland", "actores2": "Mark Wahlberg", "img":["img/uncharted/descarga (1).jpg"], "precio": 350 }
-    ];
-
-   
-
     
     
+    let carrito = [];   
+
+    
+
     function guardarEnLocalStorage() {
         LocalStorage.setItem('carrito', JSON.stringify(carrito));
       }
@@ -35,9 +23,25 @@
         // Los devuelve
         carritoPeliculas = JSON.parse(LocalStorage.getItem('carrito'));}
     }
-    
-    function redenderizarProductos(){
-        peliculasLista.forEach((info)=>{
+
+
+
+    try {
+        fetch(`peliculas.json`)
+        .then(respuesta => {
+            return respuesta.json()
+        })
+        .then(datos => {
+            redenderizarProductos(datos);      
+        }
+        )
+
+   } catch(e){
+    console.log(e);
+   }
+   
+    function redenderizarProductos(datos){
+      datos.forEach((info)=>{
     
             const miNodo = document.createElement('div');
             miNodo.classList.add('card', 'col-sm-4');
@@ -92,13 +96,14 @@
             miNodo.appendChild(miNodoCardBody);
             DOMitems.appendChild(miNodo);
     
-        });
+        })
     }
     
     
     function anyadirProductoAlCarrito(evento){
         
         carrito.push(evento.target.getAttribute('marcador'));
+        console.log(carrito)
         
         peliAgregada();
         renderizarCarrito();
@@ -115,7 +120,7 @@
     
         carritoSinDuplicados.forEach((item)=>{
     
-            const miItem = peliculasLista.filter((itemBaseDAtos)=>{
+            const miItem = datos.filter((itemBaseDAtos)=>{
     
                 return itemBaseDAtos.id === parseInt(item);
             });
@@ -160,7 +165,7 @@
     
         return carrito.reduce((total, item) =>{
     
-            const miItem = peliculasLista.filter((itemBaseDatos)=>{
+            const miItem = datos.filter((itemBaseDatos)=>{
                 return itemBaseDatos.id === parseInt(item);
                     });
             
@@ -180,16 +185,11 @@
     DOMbotonComprar.addEventListener ('click', compraRealizada);
 
     function compraRealizada(){
-        carrito = [];
-        carrito == 0 && Enviado();
+        carrito = [];      
+        Enviado();
         renderizarCarrito();
         localStorage.clear();   
-        
-       
-
-    }
-
-   
+    }   
     
     function peliAgregada(){
         Swal.fire({
@@ -236,7 +236,7 @@
         }
     
     cargarenLocalStorage();
-    redenderizarProductos ();
+    redenderizarProductos();
     renderizarCarrito();
     
  
