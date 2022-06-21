@@ -103,7 +103,10 @@
     function anyadirProductoAlCarrito(evento){
         
         carrito.push(evento.target.getAttribute('marcador'));
+<<<<<<< HEAD
         console.log(carrito)
+=======
+>>>>>>> be32fa62b138783052fd97aee81b8375ff5760fb
         
         peliAgregada();
         renderizarCarrito();
@@ -185,6 +188,7 @@
     DOMbotonComprar.addEventListener ('click', compraRealizada);
 
     function compraRealizada(){
+<<<<<<< HEAD
         carrito = [];      
         Enviado();
         renderizarCarrito();
@@ -199,6 +203,24 @@
             showConfirmButton: false,
             timer: 1500
           })
+=======
+        carrito = [];
+        carrito == 0 && Enviado();
+        renderizarCarrito();
+        localStorage.clear();   
+        
+       
+
+    }
+
+    function peliAgregada(){
+        Swal.fire({
+            customClass: {
+                confirmButton: 'swalBtnColor'},
+              title: "Se Agrego con exito al Carrito",
+              icon: 'success'
+        })
+>>>>>>> be32fa62b138783052fd97aee81b8375ff5760fb
 
     }
     function Enviado(){
