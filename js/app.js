@@ -40,8 +40,8 @@
     console.log(e);
    }
    
-    function redenderizarProductos(datos){
-      datos.forEach((info)=>{
+    function redenderizarProductos(){
+      peliculasLista.forEach((info)=>{
     
             const miNodo = document.createElement('div');
             miNodo.classList.add('card', 'col-sm-4');
@@ -120,7 +120,7 @@
     
         carritoSinDuplicados.forEach((item)=>{
     
-            const miItem = datos.filter((itemBaseDAtos)=>{
+            const miItem = peliculasLista.filter((itemBaseDAtos)=>{
     
                 return itemBaseDAtos.id === parseInt(item);
             });
@@ -165,7 +165,7 @@
     
         return carrito.reduce((total, item) =>{
     
-            const miItem = datos.filter((itemBaseDatos)=>{
+            const miItem = peliculasLista.filter((itemBaseDatos)=>{
                 return itemBaseDatos.id === parseInt(item);
                     });
             
