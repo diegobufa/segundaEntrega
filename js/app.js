@@ -28,7 +28,7 @@
 const fetchData = async () =>{
     
     try {
-        const res = await fetch("https://github.com/diegobufa/segundaEntrega/blob/master/datas/peliculas.JSON");
+        const res = await fetch("https://diegobufa.github.io/segundaEntrega/datas/peliculas.JSON");
         const data = await res.json();
 
         redenderizarProductos(data);
