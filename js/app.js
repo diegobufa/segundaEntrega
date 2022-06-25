@@ -10,6 +10,9 @@
     
     document.addEventListener("DOMContentLoaded", () => {
         fetchData();
+        if(localStorage.getItem('carrito')){
+            carrito = JSON.parse(localStorage.getItem('carrito'))
+        }
     })
 
     function guardarEnLocalStorage() {
@@ -25,7 +28,7 @@
 const fetchData = async () =>{
     
     try {
-        const res = await fetch(`/datas/peliculas.json`);
+        const res = await fetch("https://github.com/diegobufa/segundaEntrega/blob/master/datas/peliculas.JSON");
         const data = await res.json();
 
         redenderizarProductos(data);
