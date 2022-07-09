@@ -7,6 +7,8 @@
 
     const LocalStorage = localStorage;    
     let carrito = [];     
+
+    // LocalStorage 
     
     document.addEventListener("DOMContentLoaded", () => {
         fetchData();
@@ -25,6 +27,9 @@
         // Los devuelve
         carritoPeliculas = JSON.parse(LocalStorage.getItem('carrito'));}
     }
+
+// Api - JSON Local
+
 const fetchData = async () =>{
     
     try {
@@ -37,25 +42,29 @@ const fetchData = async () =>{
     console.log(error);
    }
 }
-   
+//Productos   
 
    const redenderizarProductos = data => {
           console.log(data)
           data.forEach( info =>{
     
             const miNodo = document.createElement('div');
-            miNodo.classList.add('card', 'col-sm-4');
+            miNodo.classList.add('card', 'col-sm-6','col-lg-6', 'col-md-5');
     
             const miNodoCardBody = document.createElement('div');
             miNodoCardBody.classList.add('card-body');
+            
     
             const miNodoTitle = document.createElement('h4');
             miNodoTitle.classList.add('card-title');
             miNodoTitle.textContent = info.nombre;
+            miNodoTitle.style.color = 'red';
+            miNodoTitle.style.fontSize = '2rem';
     
             const miNodoImagen = document.createElement('img');
             miNodoImagen.classList.add('img-fluid');
             miNodoImagen.setAttribute ('src', info.img);
+           
     
             const miNodoGenero = document.createElement('h5');
             miNodoGenero.classList.add('card-text');
@@ -77,11 +86,11 @@ const fetchData = async () =>{
             miNodoPrecio.classList.add('card-text');
             miNodoPrecio.textContent = `${info.precio}${divisa}`;
             miNodoPrecio.style.color = 'green';
-            miNodoPrecio.style.fontSize = '1.5rem';
+            miNodoPrecio.style.fontSize = '2rem';
     
             const miNodoBoton = document.createElement('button');
             miNodoBoton.classList.add('btn','btn-primary');
-            miNodoBoton.textContent = '+';
+            miNodoBoton.textContent = 'Agregar al Carrito';
             miNodoBoton.setAttribute('marcador', info.id);
             miNodoBoton.addEventListener('click', anyadirProductoAlCarrito);
     
@@ -99,7 +108,8 @@ const fetchData = async () =>{
         })
     }
     
-    
+// Carrito
+
     function anyadirProductoAlCarrito(evento){
         
         carrito.push(evento.target.getAttribute('marcador'));
@@ -190,10 +200,10 @@ const fetchData = async () =>{
             localStorage.clear();   
         }else{
             Error();
-        }
-        
-       
-    }   
+        }      
+    }  
+
+// Sweet Alert
     
     function peliAgregada(){
         Swal.fire({
@@ -262,6 +272,7 @@ const fetchData = async () =>{
            
             
         }
+// Llamada a las funciones
     
     cargarenLocalStorage();    
     renderizarCarrito();

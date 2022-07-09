@@ -5,38 +5,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title> Store Movies</title>
-
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/estilos.css">
 
 </head>
 <body>
-    <div class="container">
-        <h1> Peliculas Store </h1>
-        <hr>   
-    </div>
-    <div class="container-fluid">
-        <div class="row">
-            <!-- Elementos generados a partir del JSON -->
-            <main id="items" class="col-sm-8 row"></main>
-            <!-- Carrito -->
-            <aside class="col-sm-4">
-                <h2>Carrito</h2>
-                <!-- Elementos del carrito -->
-                <ul id="carrito" class="list-group"></ul>
-                <hr>
-                <!-- Precio total -->
-                <p class="text-right">Total: <span id="total"></span>$</p>
-                <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
-                <button id="boton-comprar" class="btn btn-primary">Comprar</button>
-            </aside>
-        </div>
-    </div>
+    <header>        
+            <div class="container">
+                <h1 class="titulo_pagina"> Peliculas Store </h1>
+                <hr>   
+            </div>
+        <section>
+            <div class="container-slider">
+                <div class="slider" id="slider">
+                    <div class="slider_section">
+                        <img src="carrusel/1366_2000.jpeg" class="w-100 slider_img" alt="foto1 carrusel">
+                    </div>
+                    <div class="slider_section">
+                        <img src="carrusel/Animales-fantasticos-Los-secretos-de-Dumbledore.webp" class="w-100 slider_img" alt="foto2 carrusel">
+                    </div>
+                    <div class="slider_section">
+                        <img src="carrusel/wallpapersden.com_official-everything-everywhere-all-at-once-hd_2828x1591-scaled.webp" class="w-100 slider_img" alt="foto3 carrusel">
+                    </div>
+                    <div class="slider-btn  slider-btn-right" id="btn-right"> &#62;</div>
+                    <div class="slider-btn  slider-btn-left" id="btn-left"> &#60;</div>
+                </div>
+            </div>
+        </section>
+       
+    </header>
+
+    <main>
+       <div class="container-fluid contenedor_peliculas">
+            <div class="row">
+                <!-- Elementos generados a partir del JSON -->
+                <main id="items" class="col-sm-8 row"></main>
+                <!-- Carrito -->
+                <aside class="col-sm-4">
+                    <h2 class="carrito">Carrito</h2>
+                    <!-- Elementos del carrito -->
+                    <ul id="carrito" class="list-group"></ul>
+                    <hr>
+                    <!-- Precio total -->
+                    <p class="text-right">Total: <span id="total"></span>$</p>
+                    <div class="botones">
+                        <button id="boton-vaciar" class="btn btn-danger">Vaciar</button>
+                        <button id="boton-comprar" class="btn btn-primary">Comprar</button>
+                    </div>
+                    
+                </aside>
+            </div>
+        </div> 
+    </main>
+    
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
     
+    <script src="js/slider.js"></script>
     <script src="js/peliculasLista.js"></script>
     <script src="js/app.js"></script>
-
+    
 </body>
 </html>

@@ -1,6 +1,6 @@
 
     [
-        {"id": 1, "nombre": "Maverick","genero": "Accion", "duracion": "2hs 06min", "actores": "Tom Cruise", "actores2": "Jennifer Connelly", "img":["img/maverick/top_gun_maverick-537976462-mmed.jpg"], "precio": 400 },
+        {"id": 1, "nombre": "Top Gun Maverick","genero": "Accion", "duracion": "2hs 06min", "actores": "Tom Cruise", "actores2": "Jennifer Connelly", "img":["img/maverick/top_gun_maverick-537976462-mmed.jpg"], "precio": 400 },
         {"id": 2, "nombre": "Doctor Strange en el Multiverso de la Locura","genero": "Accion", "duracion": "2hs 10min", "actores": "Benedict Cumberbatch", "actores2": "Elizabeth Olsen", "img":["img/doctor-strange/Doctor_Strange_en_el_multiverso_de_la_locura-610981386-large.jpg"], "precio": 350},
         {"id": 3, "nombre": "Todo a la vez en todas partes","genero": "Accion Comedia", "duracion": "2hs 35min", "actores": "Michelle Yeoh", "actores2": "Stephanie Hsu", "img":["img/todo a la vez/2834053.jpg"], "precio": 400 },
         {"id": 4, "nombre": "Animales Fantasticos: Los secretos de Dumbledore ","genero": "Aventura", "duracion": "2hs 22min", "actores": "Jude Law", "actores2": "Mads Mikkelsen", "img":["img/animales fantasticos/1366_2000 (1).jpeg"], "precio": 350 },
